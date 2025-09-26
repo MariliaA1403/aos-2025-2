@@ -1,18 +1,18 @@
-import { Router } from 'express';
+import { Router } from "express";
 import {
-  criarTarefa,
-  listarTarefas,
-  obterTarefa,
-  atualizarTarefa,
-  removerTarefa
-} from '../controllers/tarefasController.js';
+  criarNovaTarefa,
+  listarTodasTarefas,
+  pegarTarefaPorId,
+  atualizarTarefaPorId,
+  deletarTarefaPorId
+} from "../controllers/tarefasController.js";
 
-const router = Router();
+const tarefasRouter = Router();
 
-router.post('/', criarTarefa);
-router.get('/', listarTarefas);
-router.get('/:id', obterTarefa);
-router.put('/:id', atualizarTarefa);
-router.delete('/:id', removerTarefa);
+tarefasRouter.post("/", criarNovaTarefa);
+tarefasRouter.get("/", listarTodasTarefas);
+tarefasRouter.get("/:objectId", pegarTarefaPorId);
+tarefasRouter.put("/:objectId", atualizarTarefaPorId);
+tarefasRouter.delete("/:objectId", deletarTarefaPorId);
 
-export default router;
+export default tarefasRouter;

@@ -1,51 +1,60 @@
-import { v4 as uuidv4 } from 'uuid';
-import Tarefa from '../models/Tarefa.js';
+import TarefaModel from "../models/Tarefa.js";
 
-let tarefas = [];
+let listaTarefas = [];
 
-export function criarTarefa(req, res) {
+export const criarNovaTarefa = (req, res) => {
   const { descricao, concluida } = req.body;
 
   if (!descricao) {
-    return res.status(400).json({ erro: 'Descrição é obrigatória' });
+    return res.status(400).json({ erro: "Campo 'descricao' é obrigatório!" });
   }
 
-  const novaTarefa = new Tarefa(uuidv4(), descricao, concluida ?? false);
-  tarefas.push(novaTarefa);
-  res.status(201).json(novaTarefa);
-}
+  const tarefa = new TarefaModel(descricao, concluida);
+  listaTarefas.push(tarefa);
 
-export function listarTarefas(req, res) {
-  res.json(tarefas);
-}
+  res.status(201).json({ mensagem: "Tarefa adicionada com sucesso!", tarefa });
+};
 
-export function obterTarefa(req, res) {
-  const tarefa = tarefas.find(t => t.id === req.params.id);
+export const listarTodasTarefas = (req, res) => {
+  res.json(listaTarefas);
+};
+
+export const pegarTarefaPorId = (req, res) => {
+  const { objectId } = req.params;
+  const tarefa = listaTarefas.find(t => t.objectId === objectId);
+
   if (!tarefa) {
-    return res.status(404).json({ erro: 'Tarefa não encontrada' });
+    return res.status(404).json({ erro: "Tarefa não encontrada" });
   }
+
   res.json(tarefa);
-}
+};
 
-export function atualizarTarefa(req, res) {
-  const tarefa = tarefas.find(t => t.id === req.params.id);
+export const atualizarTarefaPorId = (req, res) => {
+  const { objectId } = req.params;
+  const tarefa = listaTarefas.find(t => t.objectId === objectId);
+
   if (!tarefa) {
-    return res.status(404).json({ erro: 'Tarefa não encontrada' });
+    return res.status(404).json({ erro: "Tarefa não encontrada" });
   }
 
   const { descricao, concluida } = req.body;
+
   if (descricao !== undefined) tarefa.descricao = descricao;
   if (concluida !== undefined) tarefa.concluida = concluida;
 
-  res.json(tarefa);
-}
+  res.json({ mensagem: "Tarefa atualizada!", tarefa });
+};
 
-export function removerTarefa(req, res) {
-  const index = tarefas.findIndex(t => t.id === req.params.id);
+export const deletarTarefaPorId = (req, res) => {
+  const { objectId } = req.params;
+  const index = listaTarefas.findIndex(t => t.objectId === objectId);
+
   if (index === -1) {
-    return res.status(404).json({ erro: 'Tarefa não encontrada' });
+    return res.status(404).json({ erro: "Tarefa não encontrada" });
   }
 
-  tarefas.splice(index, 1);
-  res.json({ mensagem: 'Tarefa removida com sucesso' });
-}
+  listaTarefas.splice(index, 1);
+
+  res.json({ mensagem: "Tarefa removida com sucesso!" });
+};
