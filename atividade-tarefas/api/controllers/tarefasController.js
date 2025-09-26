@@ -35,7 +35,7 @@ export const atualizarTarefaPorId = (req, res) => {
   const tarefa = listaTarefas.find(t => t.objectId === objectId);
 
   if (!tarefa) {
-    return res.status(404).json({ erro: "Tarefa não encontrada!" });
+    return res.status(404).json({ erro: "Tarefa não encontrada" });
   }
 
   const { descricao, concluida } = req.body;
@@ -43,7 +43,7 @@ export const atualizarTarefaPorId = (req, res) => {
   if (descricao !== undefined) tarefa.descricao = descricao;
   if (concluida !== undefined) tarefa.concluida = concluida;
 
-  res.json({ mensagem: "Tarefa atualizada!", tarefa });
+  res.json({ mensagem: "Tarefa atualizada", tarefa });
 };
 
 export const deletarTarefaPorId = (req, res) => {
@@ -51,7 +51,7 @@ export const deletarTarefaPorId = (req, res) => {
   const index = listaTarefas.findIndex(t => t.objectId === objectId);
 
   if (index === -1) {
-    return res.status(404).json({ erro: "Tarefa não encontrada!" });
+    return res.status(404).json({ erro: "Tarefa não encontrada" });
   }
 
   listaTarefas.splice(index, 1);
