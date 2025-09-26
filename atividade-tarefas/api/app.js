@@ -22,7 +22,7 @@ const PORT = process.env.PORT || 3000;
 
 // Inicializa o servidor (apenas para ambiente local)
 app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+  console.log(`Servidor rodando em: http://localhost:${PORT}`);
 });
 
 // Exporta o app (útil para testes e Vercel no futuro)
