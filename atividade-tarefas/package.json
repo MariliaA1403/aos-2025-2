@@ -2,7 +2,7 @@
   "name": "atividade-tarefas",
   "version": "1.0.0",
   "description": "ATIVIDADE",
-  "main": "app.js",
+  "main": "api/app.js",
   "type": "module",
   "scripts": {
     "start": "node api/app.js",
