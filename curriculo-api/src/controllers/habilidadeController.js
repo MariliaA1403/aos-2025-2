@@ -6,6 +6,15 @@ export const habilidadeController = {
     res.json(dados);
   },
 
+  async buscarPorId(req, res) {
+    const { id } = req.params;
+    const dado = await prisma.habilidade.findUnique({
+      where: { id: Number(id) },
+    });
+    if (!dado) return res.status(404).json({ mensagem: "Habilidade não encontrada" });
+    res.json(dado);
+  },
+
   async criar(req, res) {
     const dado = await prisma.habilidade.create({ data: req.body });
     res.status(201).json(dado);
@@ -13,16 +22,16 @@ export const habilidadeController = {
 
   async atualizar(req, res) {
     const { id } = req.params;
-    const dado = await prisma.habilidade.update({
+    const dadoAtualizado = await prisma.habilidade.update({
       where: { id: Number(id) },
       data: req.body,
     });
-    res.json(dado);
+    res.json(dadoAtualizado);
   },
 
   async deletar(req, res) {
     const { id } = req.params;
     await prisma.habilidade.delete({ where: { id: Number(id) } });
-    res.json({ message: "Habilidade excluída" });
+    res.json({ mensagem: "Habilidade excluída" });
   },
 };
