@@ -1,0 +1,27 @@
+
+{
+  "name": "curriculo-api",
+  "version": "1.0.0",
+  "description": "API REST com Express + Prisma + PostgreSQL (NeonDB) para currículos",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js",
+    "prisma": "npx prisma studio"
+  },
+  "keywords": [],
+  "author": "Marília Albuquerque",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^6.18.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "pg": "^8.16.3",
+    "prisma": "^6.18.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
