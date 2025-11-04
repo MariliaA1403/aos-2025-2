@@ -43,6 +43,14 @@ export const atualizarPessoa = async (req, res) => {
 
 export const deletarPessoa = async (req, res) => {
   const { id } = req.params;
+
+
+  await prisma.formacao.deleteMany({ where: { pessoaId: Number(id) } });
+  await prisma.experiencia.deleteMany({ where: { pessoaId: Number(id) } });
+  await prisma.habilidade.deleteMany({ where: { pessoaId: Number(id) } });
+
+  // Depois deleta a pessoa
   await prisma.pessoa.delete({ where: { id: Number(id) } });
-  res.json({ mensagem: "Pessoa removida com sucesso" });
+
+  res.json({ mensagem: "Pessoa e todos os dados relacionados foram removidos com sucesso" });
 };
