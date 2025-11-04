@@ -11,7 +11,7 @@ app.use(express.json());
 
 // Rota raiz
 app.get("/", (req, res) => {
-  res.send("🚀 API de Currículos funcionando! Use /pessoas, /formacoes, /experiencias ou /habilidades");
+  res.send("🚀 API de Currículos funcionando!");
 });
 
 // Rotas das entidades
